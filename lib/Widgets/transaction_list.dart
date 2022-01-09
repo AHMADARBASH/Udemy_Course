@@ -2,31 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_complete_guide/Models/Transaction.dart';
 import 'package:intl/intl.dart';
 
-class TransactionList extends StatefulWidget {
-  @override
-  _TransactionListState createState() => _TransactionListState();
-}
-
-class _TransactionListState extends State<TransactionList> {
-  final List<Transaction> _usrtxs = [
-    Transaction(
-      id: '1',
-      title: 'new shoe',
-      amount: 50.0,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: '2',
-      title: 'new Hat',
-      amount: 4.5,
-      date: DateTime.now(),
-    ),
-  ];
-
+class TransactionList extends StatelessWidget {
+  final List<Transaction> transactions;
+  TransactionList(this.transactions);
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: _usrtxs.map((tx) {
+      children: transactions.map((tx) {
         return Card(
           child: Row(
             children: [
