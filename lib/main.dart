@@ -24,19 +24,21 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Hello Fultter'),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Container(
-            child: Card(
-              color: Colors.blue,
-              elevation: 3,
-              margin: EdgeInsets.all(5),
-              child: Text('Charts of Transaction'),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Container(
+              child: Card(
+                color: Colors.blue,
+                elevation: 3,
+                margin: EdgeInsets.all(5),
+                child: Text('Charts of Transaction'),
+              ),
             ),
-          ),
-          UserTransactions(),
-        ],
+            UserTransactions(),
+          ],
+        ),
       ),
     );
   }
