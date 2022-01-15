@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/Material.dart';
 
 class NewTransaction extends StatefulWidget {
@@ -55,7 +57,26 @@ class _NewTransactionState extends State<NewTransaction> {
               keyboardType: TextInputType.number,
               controller: amountController,
             ),
-            TextButton(
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Text(
+                    'No Date Chosen!',
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      'Pick a Date',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            ElevatedButton(
               onPressed: () {
                 submitData();
                 titleController.clear();
@@ -63,7 +84,6 @@ class _NewTransactionState extends State<NewTransaction> {
               },
               child: Text(
                 'Add Transaction',
-                style: TextStyle(color: Colors.purple),
               ),
             ),
           ],
