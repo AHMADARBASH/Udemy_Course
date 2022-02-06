@@ -66,7 +66,7 @@ var DUMMY_MEALS = [
     affordability: Affordability.Affordable,
     complexity: Complexity.Simple,
     imageUrl:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Spaghetti_Bolognese_mit_Parmesan_oder_Grana_Padano.jpg/800px-Spaghetti_Bolognese_mit_Parmesan_oder_Grana_Padano.jpg',
+        'https://media.istockphoto.com/photos/pasta-plate-picture-id632439546?b=1&k=20&m=632439546&s=170667a&w=0&h=zTirUOTqX2JBC2QzV97ugaVJpqttT4jCH6KqaxID-Uk=',
     duration: 20,
     ingredients: [
       '4 Tomatoes',
@@ -99,7 +99,7 @@ var DUMMY_MEALS = [
     affordability: Affordability.Affordable,
     complexity: Complexity.Simple,
     imageUrl:
-        'https://cdn.pixabay.com/photo/2018/07/11/21/51/toast-3532016_1280.jpg',
+        'https://media.istockphoto.com/photos/gourmet-toast-hawaii-picture-id1287436791?b=1&k=20&m=1287436791&s=170667a&w=0&h=-ALSwYNB0up9vYJBqYTWh-n8pEp8G353KMbvlJp-zaI=',
     duration: 10,
     ingredients: [
       '1 Slice White Bread',
@@ -128,7 +128,7 @@ var DUMMY_MEALS = [
     affordability: Affordability.Pricey,
     complexity: Complexity.Simple,
     imageUrl:
-        'https://cdn.pixabay.com/photo/2014/10/23/18/05/burger-500054_1280.jpg',
+        'https://media.istockphoto.com/photos/closeup-of-home-made-burgers-picture-id854565540?b=1&k=20&m=854565540&s=170667a&w=0&h=ZF0YBJDZ3_lkPHbLVi00ZQx-9a_rvtKeIkfJrnlQy48=',
     duration: 45,
     ingredients: [
       '300g Cattle Hack',
@@ -159,7 +159,7 @@ var DUMMY_MEALS = [
     affordability: Affordability.Luxurious,
     complexity: Complexity.Challenging,
     imageUrl:
-        'https://cdn.pixabay.com/photo/2018/03/31/19/29/schnitzel-3279045_1280.jpg',
+        'https://media.istockphoto.com/photos/eating-wiener-schnitzel-picture-id641390260?b=1&k=20&m=641390260&s=170667a&w=0&h=W4Th8e2OSqHzlDhgf7aKiLdoIXswAys-YL_TUMVb0Us=',
     duration: 60,
     ingredients: [
       '8 Veal Cutlets',
@@ -196,7 +196,7 @@ var DUMMY_MEALS = [
     affordability: Affordability.Luxurious,
     complexity: Complexity.Simple,
     imageUrl:
-        'https://cdn.pixabay.com/photo/2016/10/25/13/29/smoked-salmon-salad-1768890_1280.jpg',
+        'https://media.istockphoto.com/photos/salmon-over-watercress-salad-picture-id1316673342?b=1&k=20&m=1316673342&s=170667a&w=0&h=N9RjtyGFuVEW9prXxhSa2wj15SV0j7_M2YzfBuaXrHU=',
     duration: 15,
     ingredients: [
       'Arugula',
@@ -231,7 +231,7 @@ var DUMMY_MEALS = [
     affordability: Affordability.Affordable,
     complexity: Complexity.Hard,
     imageUrl:
-        'https://cdn.pixabay.com/photo/2017/05/01/05/18/pastry-2274750_1280.jpg',
+        'https://media.istockphoto.com/photos/panna-cotta-with-orange-jelly-picture-id1298267760?b=1&k=20&m=1298267760&s=170667a&w=0&h=S91sHPpfI7qaQh7lr9TK9ehGVw3N5LWQnODLWpQDPaM=',
     duration: 240,
     ingredients: [
       '4 Sheets of Gelatine',
@@ -266,7 +266,7 @@ var DUMMY_MEALS = [
     affordability: Affordability.Affordable,
     complexity: Complexity.Simple,
     imageUrl:
-        'https://cdn.pixabay.com/photo/2018/07/10/21/23/pancake-3529653_1280.jpg',
+        'https://media.istockphoto.com/photos/pancakes-with-berries-and-maple-syrup-picture-id161170090?b=1&k=20&m=161170090&s=170667a&w=0&h=pgtnBdQKLvZz7WOmBcZhY_EXDGeATOS2jc_FJF9GbnE=',
     duration: 20,
     ingredients: [
       '1 1/2 Cups all-purpose Flour',
@@ -297,7 +297,7 @@ var DUMMY_MEALS = [
     affordability: Affordability.Pricey,
     complexity: Complexity.Challenging,
     imageUrl:
-        'https://cdn.pixabay.com/photo/2018/06/18/16/05/indian-food-3482749_1280.jpg',
+        'https://media.istockphoto.com/photos/chicken-patiala-in-black-bowl-on-dark-slate-table-top-murg-patiala-is-picture-id1277585271?b=1&k=20&m=1277585271&s=170667a&w=0&h=jh7ByJsx3nb12z-ihFgMoPNozxqdu7Up4kKPyPmw-ss=',
     duration: 35,
     ingredients: [
       '4 Chicken Breasts',
@@ -330,7 +330,7 @@ var DUMMY_MEALS = [
     affordability: Affordability.Affordable,
     complexity: Complexity.Hard,
     imageUrl:
-        'https://cdn.pixabay.com/photo/2014/08/07/21/07/souffle-412785_1280.jpg',
+        'https://media.istockphoto.com/photos/chocolate-souffles-picture-id135966211?b=1&k=20&m=135966211&s=170667a&w=0&h=tMIsFYVuS8zyc_W4yIIyC42Ed64XUjAiAjVc79jYXGQ=',
     duration: 45,
     ingredients: [
       '1 Teaspoon melted Butter',
@@ -381,7 +381,7 @@ var DUMMY_MEALS = [
     affordability: Affordability.Luxurious,
     complexity: Complexity.Simple,
     imageUrl:
-        'https://cdn.pixabay.com/photo/2018/04/09/18/26/asparagus-3304997_1280.jpg',
+        'https://media.istockphoto.com/photos/healthy-vegetable-salad-for-lunch-picture-id180761180?b=1&k=20&m=180761180&s=170667a&w=0&h=xOYVHgNJYBV3nYK5AAp_isIIi8DEjvHtAWu-1Eyuu7c=',
     duration: 30,
     ingredients: [
       'White and Green Asparagus',
