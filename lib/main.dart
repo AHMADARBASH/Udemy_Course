@@ -1,59 +1,55 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/screens/edit_product_screen.dart';
+import 'package:shop_app/screens/orders_screen.dart';
+import 'package:shop_app/screens/user_products_screen.dart';
+import './screens/cart_screen.dart';
+import 'package:shop_app/Providers/cart.dart';
+import 'package:shop_app/screens/cart_screen.dart';
+import 'package:shop_app/screens/product_detail_screen.dart';
+import './screens/product_overview_screen.dart';
+import './Providers/products.dart';
+import 'package:provider/provider.dart';
+import 'Providers/orders.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'MyShop'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
+  Widget build(context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (ctx) => Products(),
         ),
-        body: const Center());
+        ChangeNotifierProvider(
+          create: (ctx) => Cart(),
+        ),
+        ChangeNotifierProvider(
+          create: (ctx) => Order(),
+        )
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'MyShop',
+        theme: ThemeData(
+            colorScheme: ColorScheme.fromSwatch(
+              primarySwatch: Colors.purple,
+              accentColor: Colors.deepOrange,
+            ),
+            textTheme: const TextTheme(
+                subtitle1: TextStyle(fontSize: 20, color: Colors.black),
+                subtitle2: TextStyle(fontSize: 20, color: Colors.white),
+                headline5:
+                    TextStyle(fontWeight: FontWeight.bold, fontSize: 20))),
+        home: ProductOverviewScreen(),
+        routes: {
+          ProductDetailScreen.RouteName: (ctx) => ProductDetailScreen(),
+          CartScreen.routename: (ctx) => CartScreen(),
+          OrdersScreen.routename: (ctx) => const OrdersScreen(),
+          UserProductsScreen.routename: (ctx) => const UserProductsScreen(),
+          EditProdcutScreen.routename: (ctx) => const EditProdcutScreen(),
+        },
+      ),
+    );
   }
 }
