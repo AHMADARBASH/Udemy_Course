@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/Providers/auth.dart';
 import 'package:shop_app/screens/orders_screen.dart';
 import 'package:shop_app/screens/user_products_screen.dart';
+import 'package:provider/provider.dart';
 
 class AppDrawer extends StatelessWidget {
   @override
@@ -9,10 +11,9 @@ class AppDrawer extends StatelessWidget {
       child: Column(
         children: [
           AppBar(
-            title: const Text('Shop APP'),
+            title: const Text('My Shop'),
             automaticallyImplyLeading: false,
           ),
-          const Divider(),
           ListTile(
             leading: Icon(
               Icons.shop,
@@ -23,7 +24,6 @@ class AppDrawer extends StatelessWidget {
               Navigator.of(context).pushReplacementNamed('/');
             },
           ),
-          const Divider(),
           ListTile(
             leading: Icon(
               Icons.payment,
@@ -34,7 +34,6 @@ class AppDrawer extends StatelessWidget {
               Navigator.of(context).pushNamed(OrdersScreen.routename);
             },
           ),
-          const Divider(),
           ListTile(
             leading: Icon(
               Icons.edit,
@@ -43,6 +42,18 @@ class AppDrawer extends StatelessWidget {
             title: const Text('Manage Products'),
             onTap: () {
               Navigator.of(context).pushNamed(UserProductsScreen.routename);
+            },
+          ),
+          const Divider(),
+          ListTile(
+            leading: Icon(
+              Icons.logout,
+              color: Theme.of(context).colorScheme.secondary,
+            ),
+            title: const Text('Logout'),
+            onTap: () {
+              Provider.of<Auth>(context, listen: false).logout();
+              Navigator.of(context).pop();
             },
           ),
         ],

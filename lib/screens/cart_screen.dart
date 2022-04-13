@@ -9,7 +9,7 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cartitems = Provider.of<Cart>(context);
-    final orders = Provider.of<Order>(context, listen: false);
+    final orders = Provider.of<Orders>(context, listen: false);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -56,16 +56,7 @@ class CartScreen extends StatelessWidget {
                       ),
                       backgroundColor: Colors.white,
                     ),
-                    TextButton(
-                        onPressed: () {
-                          orders.addOrder(cartitems.items.values.toList(),
-                              cartitems.totalAmount);
-                          cartitems.clear();
-                        },
-                        child: Text(
-                          'Order Now',
-                          style: Theme.of(context).textTheme.subtitle2,
-                        ))
+                    OrderButton(cartitems: cartitems, orders: orders)
                   ],
                 ),
               ),
@@ -77,5 +68,49 @@ class CartScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class OrderButton extends StatefulWidget {
+  const OrderButton({
+    Key? key,
+    required this.cartitems,
+    required this.orders,
+  }) : super(key: key);
+
+  final Cart cartitems;
+  final Orders orders;
+
+  @override
+  State<OrderButton> createState() => _OrderButtonState();
+}
+
+class _OrderButtonState extends State<OrderButton> {
+  var _isloading = false;
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+        onPressed: widget.cartitems.totalAmount <= 0
+            ? null
+            : () async {
+                setState(() {
+                  _isloading = true;
+                });
+                await widget.orders.addOrder(
+                    widget.cartitems.items.values.toList(),
+                    widget.cartitems.totalAmount);
+                setState(() {
+                  _isloading = false;
+                });
+                widget.cartitems.clear();
+              },
+        child: _isloading
+            ? const CircularProgressIndicator(
+                color: Colors.white,
+              )
+            : Text(
+                'Order Now',
+                style: Theme.of(context).textTheme.subtitle2,
+              ));
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/Providers/auth.dart';
 import 'package:shop_app/Providers/product.dart';
 import 'package:shop_app/Providers/cart.dart';
 import 'package:shop_app/screens/product_detail_screen.dart';
@@ -6,15 +7,13 @@ import 'package:provider/provider.dart';
 
 class ProductItem extends StatelessWidget {
   static const routeName = '/productItem';
-  // final String id;
-  // final String title;
-  // final String imageUrl;
-  // ProductItem({required this.id, required this.title, required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
+    final scaffold = ScaffoldMessenger.of(context);
     final product = Provider.of<Product>(context, listen: false);
     final cart = Provider.of<Cart>(context, listen: false);
+    final authToken = Provider.of<Auth>(context);
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
@@ -32,8 +31,21 @@ class ProductItem extends StatelessWidget {
             backgroundColor: Colors.black87,
             leading: Consumer<Product>(
               builder: (ctx, prodcut, child) => IconButton(
-                onPressed: () {
-                  product.togglefavorite();
+                onPressed: () async {
+                  try {
+                    await product.togglefavorite(prodcut.id, prodcut,
+                        authToken.token!, authToken.userID!);
+                  } catch (error) {
+                    scaffold.hideCurrentSnackBar();
+                    scaffold.showSnackBar(SnackBar(
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: const [
+                          Text('set favorite error!'),
+                        ],
+                      ),
+                    ));
+                  }
                 },
                 color: Colors.red,
                 icon: Icon(product.isFavorite

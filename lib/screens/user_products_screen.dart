@@ -7,10 +7,13 @@ import '../widgets/user_product_item.dart';
 class UserProductsScreen extends StatelessWidget {
   static const routename = '/UserProductScreen';
   const UserProductsScreen({Key? key}) : super(key: key);
+  Future<void> refreshData(BuildContext context) async {
+    await Provider.of<Products>(context, listen: false)
+        .fetchandSetProducts(true);
+  }
 
   @override
   Widget build(BuildContext context) {
-    final productsData = Provider.of<Products>(context).items;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -24,21 +27,40 @@ class UserProductsScreen extends StatelessWidget {
             ),
           ],
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(8),
-          child: ListView.builder(
-              itemCount: productsData.length,
-              itemBuilder: (_, i) => Column(
-                    children: [
-                      UserProductItem(
-                        id: productsData[i].id,
-                        title: productsData[i].title,
-                        imageUrl: productsData[i].imageUrl,
-                      ),
-                      const Divider(),
-                    ],
-                  )),
-        ),
+        body: FutureBuilder(
+            future: refreshData(context),
+            builder: (ctx, snapshot) =>
+                snapshot.connectionState == ConnectionState.waiting
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : snapshot.hasData
+                        ? RefreshIndicator(
+                            onRefresh: () => refreshData(context),
+                            child: Consumer<Products>(
+                              builder: (ctx, data, _) => Padding(
+                                padding: const EdgeInsets.all(8),
+                                child: ListView.builder(
+                                    itemCount: data.items.length,
+                                    itemBuilder: (_, i) => Column(
+                                          children: [
+                                            UserProductItem(
+                                              id: data.items[i].id,
+                                              title: data.items[i].title,
+                                              imageUrl: data.items[i].imageUrl,
+                                            ),
+                                            const Divider(),
+                                          ],
+                                        )),
+                              ),
+                            ),
+                          )
+                        : const Center(
+                            child: Text(
+                              'no prodcuts to manage for you',
+                              style: TextStyle(fontSize: 24),
+                            ),
+                          )),
       ),
     );
   }
