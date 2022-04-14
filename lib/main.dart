@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shop_app/screens/edit_product_screen.dart';
 import 'package:shop_app/screens/orders_screen.dart';
 import 'package:shop_app/screens/product_overview_screen.dart';
+import './screens/splash_screen.dart';
 import 'package:shop_app/screens/user_products_screen.dart';
 import './screens/cart_screen.dart';
 import 'package:shop_app/Providers/cart.dart';
@@ -51,7 +52,14 @@ class MyApp extends StatelessWidget {
                   subtitle2: TextStyle(fontSize: 20, color: Colors.white),
                   headline5:
                       TextStyle(fontWeight: FontWeight.bold, fontSize: 20))),
-          home: auth.isAuth ? ProductOverviewScreen() : AuthScreen(),
+          home: auth.isAuth
+              ? ProductOverviewScreen()
+              : FutureBuilder(
+                  future: auth.tryAutoLogin(),
+                  builder: (ctx, snapshot) =>
+                      snapshot.connectionState == ConnectionState.waiting
+                          ? const SplashScreen()
+                          : AuthScreen()),
           routes: {
             AuthScreen.routeName: (ctx) => AuthScreen(),
             ProductDetailScreen.RouteName: (ctx) => ProductDetailScreen(),

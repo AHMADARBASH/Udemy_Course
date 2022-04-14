@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import '../Providers/products.dart';
 
 class ProductDetailScreen extends StatelessWidget {
-  // ignore: constant_identifier_names
   static const RouteName = '/productDetailScreen';
   @override
   Widget build(BuildContext context) {

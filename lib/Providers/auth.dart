@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:math';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
 import '../models/http_Exceptions.dart';
 import 'package:flutter/material.dart';
@@ -54,6 +54,14 @@ class Auth with ChangeNotifier {
       _expiryDate = DateTime.now()
           .add(Duration(seconds: int.parse(responseData['expiresIn'])));
       autoLogout();
+
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      final tokenData = json.encode({
+        'token': _token,
+        'userID': _userID,
+        'ExpiryDate': _expiryDate!.toIso8601String()
+      });
+      prefs.setString('TokenData', tokenData);
       notifyListeners();
     } catch (error) {
       rethrow;
@@ -68,14 +76,36 @@ class Auth with ChangeNotifier {
     return authenticateUser(email, password, 'signInWithPassword');
   }
 
-  void logout() {
+  Future<bool> tryAutoLogin() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (!prefs.containsKey('TokenData')) {
+      return false;
+    }
+    final Map<String, dynamic> extractedData =
+        json.decode(prefs.getString('TokenData')!);
+    print(json.decode(prefs.getString('TokenData')!));
+    final expiryDate = DateTime.parse(extractedData['ExpiryDate']);
+    if (expiryDate.isBefore(DateTime.now())) {
+      return false;
+    }
+    print('token is valid');
+    _token = extractedData['token'];
+    _userID = extractedData['userID'];
+    _expiryDate = DateTime.parse(extractedData['ExpiryDate']);
+    notifyListeners();
+    autoLogout();
+    return true;
+  }
+
+  Future<void> logout() async {
     _token = null;
     _userID = null;
     _expiryDate = null;
     if (_authTimer != null) {
       _authTimer!.cancel();
     }
-
+    final prefs = await SharedPreferences.getInstance();
+    prefs.clear();
     notifyListeners();
   }
 
@@ -85,9 +115,10 @@ class Auth with ChangeNotifier {
     }
     final timeToExpire = _expiryDate!.difference(DateTime.now()).inSeconds;
     Timer(
-        Duration(
-          seconds: timeToExpire,
-        ),
-        logout);
+      Duration(
+        seconds: timeToExpire,
+      ),
+      logout,
+    );
   }
 }
